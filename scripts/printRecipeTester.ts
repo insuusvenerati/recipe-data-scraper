@@ -2,27 +2,28 @@ import { question } from 'readline-sync';
 import { microdataUrls, jsonLdUrls } from './testResponses';
 import recipeDataScraper from '../src/main';
 
-async function attemptPrintRecipe(url) {
+async function attemptPrintRecipe(url: any) {
   try {
     console.log(`- - - - - ${url} - - - - -`);
     await recipeDataScraper(url, { printToConsole: true });
-    console.log(' - - - - - - - end recipe - - - - - - - - - -');
+    console.log(" - - - - - - - end recipe - - - - - - - - - -");
   } catch (error) {
-    console.log('Something went wrong', error);
+    console.log("Something went wrong", error);
   }
 }
 
-async function printRecipeCollection(recipes) {
+async function printRecipeCollection(recipes: any) {
   for (const recipe in recipes) {
     if (Object.hasOwnProperty.call(recipes, recipe)) {
       const recipeInfo = recipes[recipe];
 
       const answer = question(`Print next recipe? (y/n): `);
 
-      if (answer === 'y') {
+      if (answer === "y") {
         await attemptPrintRecipe(recipeInfo.originalUrl);
       } else {
-        console.log('Quitting...');
+        console.log("Quitting...");
+        // @ts-expect-error TS(2580): Cannot find name 'process'. Do you need to install... Remove this comment to see the full error message
         process.exit(1);
       }
     }
@@ -34,6 +35,7 @@ async function enterCustomUrl() {
 
   if (url === 'q') {
     console.log('Quitting! Come back later!');
+    // @ts-expect-error TS(2580): Cannot find name 'process'. Do you need to install... Remove this comment to see the full error message
     process.exit(1);
   }
 
@@ -57,9 +59,11 @@ async function recipeTesterPrintAll() {
   } else {
     const testCustomUrlOption = question(`Would you like to test a custom url? (y/n) `);
     if (testCustomUrlOption === 'y') {
+      // @ts-expect-error TS(2554): Expected 0 arguments, but got 1.
       enterCustomUrl(testCustomUrlOption);
     } else {
       console.log('Quitting...');
+      // @ts-expect-error TS(2580): Cannot find name 'process'. Do you need to install... Remove this comment to see the full error message
       process.exit(1);
     }
   }

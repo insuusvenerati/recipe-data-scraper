@@ -11,6 +11,7 @@ async function recipeUrlTester() {
 
   if (!answer) {
     console.log('Quitting! Come back when you\'re ready!');
+    // @ts-expect-error TS(2580): Cannot find name 'process'. Do you need to install... Remove this comment to see the full error message
     process.exit(1);
   }
 
@@ -31,6 +32,7 @@ async function recipeUrlTester() {
     recipeUrlTester();
   } else {
     console.log('Quitting! Come back soon!');
+    // @ts-expect-error TS(2580): Cannot find name 'process'. Do you need to install... Remove this comment to see the full error message
     process.exit(1);
   }
 }
