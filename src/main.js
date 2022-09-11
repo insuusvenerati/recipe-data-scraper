@@ -1,15 +1,13 @@
-import axios from 'axios';
-import cheerio from 'cheerio';
-import MicrodataScraper from './scrapers/MicrodataScraper';
-import JsonLdScraper from './scrapers/JsonLdScraper';
-import logger from './utils/logger';
+import axios from "axios";
+import cheerio from "cheerio";
+import MicrodataScraper from "./scrapers/MicrodataScraper";
+import JsonLdScraper from "./scrapers/JsonLdScraper";
+import logger from "./utils/logger";
 
-const errorMessage = 'Could not find recipe data';
+const errorMessage = "Could not find recipe data";
 
 export default async (url, options = {}) => {
-  const {
-    printToConsole,
-  } = options;
+  const { printToConsole } = options;
 
   let chtml;
 
@@ -35,7 +33,7 @@ export default async (url, options = {}) => {
       url,
     };
   } catch (error) {
-    logger('main:JsonLdScraper', {
+    logger("main:JsonLdScraper", {
       ...error,
       url,
     });
@@ -55,7 +53,7 @@ export default async (url, options = {}) => {
       url,
     };
   } catch (error) {
-    logger('main:MicrodataScraper', {
+    logger("main:MicrodataScraper", {
       ...error,
       url,
     });
