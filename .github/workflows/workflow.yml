@@ -4,5 +4,20 @@ on: [push]
 jobs:
   tests:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version: [14.x, 16.x, 18.x]
     steps:
       - uses: actions/checkout@v3
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v3.4.1
+        with:
+          node-version: ${{ matrix.version }}
+          cache: yarn
+          
+      - name: install, lint, test
+        run: |
+          yarn install
+          yarn lint
+          yarn test
